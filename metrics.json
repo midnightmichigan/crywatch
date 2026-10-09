@@ -1,0 +1,28 @@
+{
+  "test_accuracy": 0.44041450777202074,
+  "cry_detection_accuracy": 0.9844559585492227,
+  "per_class_accuracy": {
+    "belly pain": 0.2777777777777778,
+    "burping": 0.4375,
+    "cold_hot": 0.13333333333333333,
+    "discomfort": 0.05,
+    "hungry": 0.3333333333333333,
+    "laugh": 1.0,
+    "noise": 0.75,
+    "silence": 1.0,
+    "tired": 0.3684210526315789
+  },
+  "n_test": 193,
+  "classes": [
+    "belly pain",
+    "burping",
+    "cold_hot",
+    "discomfort",
+    "hungry",
+    "laugh",
+    "noise",
+    "silence",
+    "tired"
+  ],
+  "params": 51273
+}

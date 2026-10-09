@@ -12,7 +12,7 @@ import time
 
 import numpy as np
 
-from features import extract_features
+from features import extract_features, feature_dim
 from model import TinyMLP
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -38,7 +38,7 @@ def load_model():
     with open(os.path.join(ROOT, 'labels.json')) as f:
         labels = json.load(f)
     model = TinyMLP.load(os.path.join(ROOT, 'weights.npz'),
-                         in_dim=480, n_classes=len(labels),
+                         in_dim=feature_dim(), n_classes=len(labels),
                          hidden=(96, 48))
     return model, labels
 

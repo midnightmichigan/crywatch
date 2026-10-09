@@ -3,8 +3,4 @@ data/
 __pycache__/
 *.pyc
 features.npz
-weights.npz
-metrics.json
-labels.json
-test_files.json
 .DS_Store

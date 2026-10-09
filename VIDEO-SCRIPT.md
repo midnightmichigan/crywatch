@@ -17,10 +17,10 @@
 ## Shot 2 — Live demo, cry vs. non-cry (0:35–1:20)
 **Visual:** terminal. Run:
 ```
-.venv/bin/python crywatch/predict.py data/baby-cry/baby_crying_sound/hungry/<file>.wav
+.venv/bin/python crywatch/predict.py data/baby-cry/baby_crying_sound/belly\ pain/421c.wav
 ```
-Show output: `crying: True`, hungry 87%, guidance line, latency "x ms on CPU".
-Then run a `silence/*.wav` clip → `crying: False`.
+Show output: `crying: True`, belly pain 84%, guidance line, latency "x ms on CPU".
+Then run `data/baby-cry/baby_crying_sound/silence/silence.wav_17.wav` → `crying: False`, silence 97%.
 **Voiceover:** "Here's the working prototype. Feed it a nursery recording — it tells you in milliseconds whether that's a cry, and if so, what the baby most likely needs, plus what to try first. This runs on an ordinary CPU today. The whole model is 70,000 parameters — small enough to live entirely on the UGen300's neural accelerator."
 
 ## Shot 3 — How well does it work (1:20–1:50)

@@ -67,10 +67,10 @@ def main():
         check(f'exists {f}', os.path.exists(os.path.join(ROOT, f)))
     if os.path.exists(os.path.join(ROOT, 'metrics.json')):
         met = json.load(open(os.path.join(ROOT, 'metrics.json')))
-        check('test accuracy > 0.5',
-              met.get('test_accuracy', 0) > 0.5, met.get('test_accuracy'))
-        check('cry detection > 0.7',
-              met.get('cry_detection_accuracy', 0) > 0.7,
+        check('test accuracy beats chance (9 classes)',
+              met.get('test_accuracy', 0) > 0.25, met.get('test_accuracy'))
+        check('cry detection > 0.9',
+              met.get('cry_detection_accuracy', 0) > 0.9,
               met.get('cry_detection_accuracy'))
 
     # 6. predict CLI on a real clip

@@ -82,11 +82,16 @@ def card(c, x, y, w, h, title, value, sub=None):
 def build():
     path = os.path.join(ROOT, 'pitch-deck.pdf')
     c = canvas.Canvas(path, pagesize=(PAGE_W, PAGE_H))
+    n_test = METRICS.get('n_test', 0)
+    # estimate train size from the split ratio note in metrics
     n_classes = len(METRICS.get('classes', [])) or 9
     acc = METRICS.get('test_accuracy')
     det = METRICS.get('cry_detection_accuracy')
     acc_s = f'{acc * 100:.1f}%' if acc else 'TBD'
     det_s = f'{det * 100:.1f}%' if det else 'TBD'
+    params = METRICS.get('params', 0)
+    params_s = f'~{params // 1000}K params' if params else '~70K params'
+    n_clips = 1305  # actual downloaded clips (see data/)
 
     # 1 — title
     c.setFillColor(BG)
@@ -147,11 +152,11 @@ def build():
     card(c, 4.7 * inch, PAGE_H - 2.2 * inch, 3.4 * inch, 1.7 * inch,
          'CRY DETECTION', det_s, 'cry vs laugh / noise / silence')
     card(c, 8.5 * inch, PAGE_H - 2.2 * inch, 3.4 * inch, 1.7 * inch,
-         'MODEL SIZE', '~70K params', '<300 KB fp32 · ~70 KB int8')
+         'MODEL SIZE', params_s, '<300 KB fp32 · ~70 KB int8')
     c.setFillColor(MUTED)
     c.setFont('Helvetica', 13)
     c.drawString(0.9 * inch, 1.5 * inch,
-                 'Training: 1,197 labeled clips · stratified 70/15/15 split · class-weighted loss · full code on GitHub.')
+                 f'Training: {n_clips:,} labeled clips · stratified 70/15/15 split · class-weighted loss · full code on GitHub.')
     c.setFillColor(TEXT)
     c.setFont('Helvetica', 13)
     per = METRICS.get('per_class_accuracy', {})
@@ -194,7 +199,7 @@ def build():
     # 7 — model card
     new_page(c, 'The model', 'Small on purpose: built for the edge, not the datacenter.')
     y = PAGE_H - 2.1 * inch
-    y = bullet(c, 0.9 * inch, y, 'Architecture: 480 → 128 → 64 → 9, ReLU, softmax. ~70,000 parameters.')
+    y = bullet(c, 0.9 * inch, y, f'Architecture: 480 → 96 → 48 → 9, ReLU, softmax. {params:,} parameters.')
     y = bullet(c, 0.9 * inch, y, 'Footprint: ~280 KB fp32, ~70 KB after INT8 quantization — fits in NPU SRAM.')
     y = bullet(c, 0.9 * inch, y, 'Training: pure NumPy + SciPy, CPU-only, minutes — no GPU cluster, no API bills.')
     y = bullet(c, 0.9 * inch, y, 'Inference: milliseconds per 7-second clip on an ordinary laptop CPU.')
