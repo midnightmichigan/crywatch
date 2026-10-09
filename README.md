@@ -12,9 +12,10 @@ too cold/hot), and never lets nursery audio leave the room.
 - **Real problem, personal stake.** Built by a dad of a 5-month-old. Misreading
   cries is the top stressor for new parents; today's monitors stream nursery
   audio to the cloud.
-- **Real working prototype, honest metrics.** 70k-parameter neural net trained
-  on 1,197 labeled clips, evaluated on a held-out test set. Numbers in
-  `metrics.json` — no cherry-picking.
+- **Real working prototype, honest metrics.** 51k-parameter neural net trained
+  on 1,305 labeled clips, evaluated on a held-out test set: 98.4% cry
+  detection, 44.0% reason classification. Numbers in `metrics.json` —
+  no cherry-picking.
 - **Built for the UGen300.** The model is tiny (<300 KB fp32, ~70 KB int8),
   mel-spectrogram front-end runs on a microcontroller-class CPU, and the
   forward pass is pure matrix math — a textbook Hailo-10H (40 TOPS INT4)
@@ -29,7 +30,7 @@ too cold/hot), and never lets nursery audio leave the room.
 - `crywatch/train.py` — stratified split, class-weighted training, test metrics
 - `crywatch/predict.py` — CLI demo: classify any wav clip
 - `test_flow.py` — end-to-end verification (`ALL CHECKS PASSED`)
-- `weights.npz`, `labels.json`, `metrics.json` — trained artifacts
+- `weights.npz` (51K params), `labels.json`, `metrics.json` — trained artifacts
 - `pitch-deck.pdf` — Stage I proposal deck (≤20 pages)
 - `VIDEO-SCRIPT.md` — 3-minute demo video script + shot plan
 
